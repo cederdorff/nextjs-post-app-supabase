@@ -32,29 +32,29 @@ const POSTS_URL = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/posts`;
 
 ## Routes
 
-I Next.js bestemmer mappestrukturen i `src/app` dine routes. Der er ingen `<Routes>` og `<Route>` som i React Router.
+I Next.js bestemmer mappestrukturen i `app` dine routes. Der er ingen `<Routes>` og `<Route>` som i React Router.
 
 | Route               | Fil                                | Side           |
 | ------------------- | ---------------------------------- | -------------- |
-| `/`                 | `src/app/page.js`                  | HomePage       |
-| `/create`           | `src/app/create/page.js`           | CreatePage     |
-| `/posts/:id`        | `src/app/posts/[id]/page.js`       | PostDetailPage |
-| `/posts/:id/update` | `src/app/posts/[id]/update/page.js`| UpdatePage     |
+| `/`                 | `app/page.js`                  | HomePage       |
+| `/create`           | `app/create/page.js`           | CreatePage     |
+| `/posts/:id`        | `app/posts/[id]/page.js`       | PostDetailPage |
+| `/posts/:id/update` | `app/posts/[id]/update/page.js` | UpdatePage     |
 
 ## Fra React Router til Next.js
 
 | React (Vite + React Router)              | Next.js                                       |
 | ---------------------------------------- | --------------------------------------------- |
-| `src/App.jsx` med `<Routes>`             | Mapper og `page.js` filer i `src/app`         |
-| `<Header />` i `App.jsx`                 | `<Header />` i `src/app/layout.js`            |
+| `src/App.jsx` med `<Routes>`             | Mapper og `page.js` filer i `app`         |
+| `<Header />` i `App.jsx`                 | `<Header />` i `app/layout.js`            |
 | `import { Link } from "react-router"`    | `import Link from "next/link"`                |
 | `<Link to="/create">`                    | `<Link href="/create">`                       |
 | `<NavLink>` med `active` class           | `<Link>` + `usePathname()`                    |
 | `useNavigate()` og `navigate("/")`       | `useRouter()` og `router.push("/")`           |
 | `useParams()` fra `react-router`         | `useParams()` fra `next/navigation`           |
 | `import.meta.env.VITE_...`               | `process.env.NEXT_PUBLIC_...`                 |
-| `src/main.css`                           | `src/app/globals.css`                         |
+| `src/main.css`                           | `app/globals.css`                         |
 
 Siderne bruger `useState`, `useEffect` og event handlers, og derfor starter de med `"use client"`. Så bliver de Client Components ligesom i React-versionen.
 
-`src/app/posts/[id]/loading.js` vises, mens Next.js læser `id` fra URL'en. Header er pakket ind i `<Suspense>` i `layout.js`, fordi den læser URL'en med `usePathname()`.
+`app/posts/[id]/loading.js` vises, mens Next.js læser `id` fra URL'en. Header er pakket ind i `<Suspense>` i `layout.js`, fordi den læser URL'en med `usePathname()`.

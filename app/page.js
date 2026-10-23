@@ -1,26 +1,14 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import PostCard from "@/components/PostCard";
 
-const POSTS_URL = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/posts`;
+const POSTS_URL = `${process.env.SUPABASE_URL}/posts`;
 const headers = {
-  apikey: process.env.NEXT_PUBLIC_SUPABASE_APIKEY,
+  apikey: process.env.SUPABASE_APIKEY,
   "Content-Type": "application/json",
 };
 
-export default function HomePage() {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    async function getPosts() {
-      const response = await fetch(POSTS_URL, { headers });
-      const data = await response.json();
-      setPosts(data);
-    }
-
-    getPosts();
-  }, []);
+export default async function HomePage() {
+  const response = await fetch(POSTS_URL, { headers });
+  const posts = await response.json();
 
   return (
     <main className="app">
